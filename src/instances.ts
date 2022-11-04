@@ -1,3 +1,9 @@
+/**
+ * @internal
+ * @since 1.0.0
+ */
+
+
 import { success } from './constructors'
 import { RemoteData } from './model'
 import { isEmpty, isFailure, isLoading, isSuccess } from './refinements'

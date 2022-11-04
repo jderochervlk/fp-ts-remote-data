@@ -1,3 +1,9 @@
+/**
+ * @internal
+ * @since 1.0.0
+ */
+
+
 import type { RemoteData } from './model'
 
 /**
@@ -53,10 +59,12 @@ type remoteDataOf<E, A> = {
  * @since 1.0.0
  * 
  * @example
- * const data = RD.of({ loading: true }) // => loading
- * const data = RD.of({ loading: false, failure: Error("oh no") }) // => failure
- * const data = RD.of({ loading: false, value: undefined }) // => empty
- * const data = RD.of({ loading: false, value: 42 }) // => success
+ * import * as RD from '@jvlk/fp-ts-remote-data'
+ * 
+ * const one = RD.of({ loading: true }) // => loading
+ * const two = RD.of({ loading: false, failure: Error("oh no") }) // => failure
+ * const three = RD.of({ loading: false, value: undefined }) // => empty
+ * const four = RD.of({ loading: false, value: 42 }) // => success
  */
 export const of = <E, A>(obj: remoteDataOf<E, A>): RemoteData<E, A> => {
     return obj.loading 

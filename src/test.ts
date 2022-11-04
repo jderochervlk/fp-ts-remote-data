@@ -1,3 +1,8 @@
+/**
+ * @internal
+ * @since 1.0.0
+ */
+
 import * as RD from '.'
 import { pipe } from 'fp-ts/lib/function'
 
