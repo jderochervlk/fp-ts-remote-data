@@ -1,0 +1,69 @@
+import type { RemoteData } from './model'
+
+/**
+ * Constructs a new `RemoteData` with a loading state
+ *
+ * @category constructors
+ * @since 1.0.0
+ */
+export const loading: RemoteData<never, never> = { _tag: 'Loading' }
+
+/**
+ * Constructs a new `RemoteData` holding a `Success` value.
+ *
+ * @category constructors
+ * @since 1.0.0
+ * @param a
+ */
+export const success = <E = never, A = never>(a: A): RemoteData<E, A> => ({
+  _tag: 'Success',
+  success: a,
+})
+
+/**
+ * Constructs a new `RemoteData` holding an `Failure` value.
+ *
+ * @category constructors
+ * @since 1.0.0
+ * @param e
+ */
+export const failure = <E = never, A = never>(e: E): RemoteData<E, A> => ({
+  _tag: 'Failure',
+  failure: e,
+})
+
+/**
+ * Constructs a new `RemoteData` with an empty state
+ *
+ * @category constructors
+ * @since 1.0.0
+ */
+export const empty: RemoteData<never, never> = { _tag: 'Empty' }
+
+type remoteDataOf<E, A> = {
+  loading: boolean,
+  failure?: E
+  value?: A | null | undefined
+}
+
+/**
+ * Constructs a new `RemoteData` from an object
+ *
+ * @category constructors
+ * @since 1.0.0
+ * 
+ * @example
+ * const data = RD.of({ loading: true }) // => loading
+ * const data = RD.of({ loading: false, failure: Error("oh no") }) // => failure
+ * const data = RD.of({ loading: false, value: undefined }) // => empty
+ * const data = RD.of({ loading: false, value: 42 }) // => success
+ */
+export const of = <E, A>(obj: remoteDataOf<E, A>): RemoteData<E, A> => {
+    return obj.loading 
+      ? loading
+      : obj.failure 
+        ? failure(obj.failure)
+        : obj.value
+            ? success(obj.value)
+            : empty
+}
