@@ -1,6 +1,6 @@
 {
   "name": "@jvlk/fp-ts-remote-data",
-  "version": "1.0.0-alpha.2",
+  "version": "0.0.0-development",
   "description": "An fp-ts library to make it easy to work with remote data.",
   "source": "src/index.ts",
   "main": "dist/index.js",
@@ -13,11 +13,12 @@
     "prepare": "husky install",
     "test": "jest",
     "test:watch": "jest --watch",
-    "tsc": "tsc"
+    "tsc": "tsc",
+    "semantic-release": "semantic-release"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jderochervlk/fp-ts-remote-data.git"
+    "url": "https://github.com/jderochervlk/fp-ts-remote-data.git"
   },
   "keywords": [],
   "author": "Josh Vlk",
@@ -41,7 +42,8 @@
     "jest": "^29.2.2",
     "parcel": "^2.7.0",
     "prettier": "^2.7.1",
-    "ts-node": "^10.9.1"
+    "ts-node": "^10.9.1",
+    "semantic-release": "^19.0.5"
   },
   "peerDependencies": {
     "fp-ts": "^2.13.1",
