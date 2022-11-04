@@ -20,6 +20,8 @@ jobs:
           cache: 'npm'
       - name: Install
         run: npm install
+      - name: Build
+        run: npm run build
       - name: Release
         run: npm run semantic-release
         env:
