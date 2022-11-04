@@ -9,6 +9,8 @@ RemoteData represents a value that can be in one of four states:
 - Empty
 - Success
 
+[Read the full documentation](https://jderochervlk.github.io/fp-ts-remote-data/).
+
 ## Example in React
 
 ```tsx
