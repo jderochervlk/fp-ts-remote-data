@@ -1,13 +1,17 @@
 /**
- * @internal
+ * Functions to create a new RemoteData.
+ * 
  * @since 1.0.0
  */
-
-
 import type { RemoteData } from './model'
 
 /**
- * Constructs a new `RemoteData` with a loading state
+ * Constructs a new `RemoteData` with a loading state.
+ * 
+ * @example
+ * import * as RD from '@jvlk/fp-ts-remote-data`
+ * 
+ * const loadingValue = RD.loading
  *
  * @category constructors
  * @since 1.0.0
@@ -16,10 +20,14 @@ export const loading: RemoteData<never, never> = { _tag: 'Loading' }
 
 /**
  * Constructs a new `RemoteData` holding a `Success` value.
+ * 
+ * @example
+ * import * as RD from '@jvlk/fp-ts-remote-data`
+ * 
+ * const successValue = RD.success(42)
  *
  * @category constructors
  * @since 1.0.0
- * @param a
  */
 export const success = <E = never, A = never>(a: A): RemoteData<E, A> => ({
   _tag: 'Success',
@@ -28,10 +36,14 @@ export const success = <E = never, A = never>(a: A): RemoteData<E, A> => ({
 
 /**
  * Constructs a new `RemoteData` holding an `Failure` value.
+ * 
+ * @example
+ * import * as RD from '@jvlk/fp-ts-remote-data`
+ * 
+ * const failure = RD.failure(42)
  *
  * @category constructors
  * @since 1.0.0
- * @param e
  */
 export const failure = <E = never, A = never>(e: E): RemoteData<E, A> => ({
   _tag: 'Failure',
@@ -39,7 +51,12 @@ export const failure = <E = never, A = never>(e: E): RemoteData<E, A> => ({
 })
 
 /**
- * Constructs a new `RemoteData` with an empty state
+ * Constructs a new `RemoteData` with an empty state.
+ * 
+ * @example
+ * import * as RD from '@jvlk/fp-ts-remote-data`
+ * 
+ * const emptyValue = RD.empty
  *
  * @category constructors
  * @since 1.0.0
