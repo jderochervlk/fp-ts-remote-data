@@ -1,7 +1,7 @@
 {
   "name": "@jvlk/fp-ts-remote-data",
   "version": "1.0.0-alpha.2",
-  "description": "",
+  "description": "An fp-ts library to make it easy to work with remote data.",
   "source": "src/index.ts",
   "main": "dist/index.js",
   "module": "dist/module.js",
