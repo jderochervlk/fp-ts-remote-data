@@ -10,12 +10,6 @@
   ],
   "pkgRoot": ".",
   "plugins": [
-    [
-      "@semantic-release/exec",
-      {
-        "prepareCmd": "NEXT_VERSION=\"${nextRelease.version}\" yarn update-package"
-      }
-    ],
     "@semantic-release/commit-analyzer",
     "@semantic-release/release-notes-generator",
     [
