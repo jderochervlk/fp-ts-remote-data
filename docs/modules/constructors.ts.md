@@ -6,6 +6,8 @@ parent: Modules
 
 ## constructors overview
 
+Functions to create a new RemoteData.
+
 Added in v1.0.0
 
 ---
@@ -25,12 +27,20 @@ Added in v1.0.0
 
 ## empty
 
-Constructs a new `RemoteData` with an empty state
+Constructs a new `RemoteData` with an empty state.
 
 **Signature**
 
 ```ts
 export declare const empty: RemoteData<never, never>
+```
+
+**Example**
+
+```ts
+import * as RD from '@jvlk/fp-ts-remote-data'
+
+const emptyValue = RD.empty
 ```
 
 Added in v1.0.0
@@ -45,16 +55,32 @@ Constructs a new `RemoteData` holding an `Failure` value.
 export declare const failure: <E = never, A = never>(e: E) => RemoteData<E, A>
 ```
 
+**Example**
+
+```ts
+import * as RD from '@jvlk/fp-ts-remote-data'
+
+const failure = RD.failure(42)
+```
+
 Added in v1.0.0
 
 ## loading
 
-Constructs a new `RemoteData` with a loading state
+Constructs a new `RemoteData` with a loading state.
 
 **Signature**
 
 ```ts
 export declare const loading: RemoteData<never, never>
+```
+
+**Example**
+
+```ts
+import * as RD from '@jvlk/fp-ts-remote-data'
+
+const loadingValue = RD.loading
 ```
 
 Added in v1.0.0
@@ -90,6 +116,14 @@ Constructs a new `RemoteData` holding a `Success` value.
 
 ```ts
 export declare const success: <E = never, A = never>(a: A) => RemoteData<E, A>
+```
+
+**Example**
+
+```ts
+import * as RD from '@jvlk/fp-ts-remote-data'
+
+const successValue = RD.success(42)
 ```
 
 Added in v1.0.0

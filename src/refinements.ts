@@ -18,7 +18,6 @@ import { Empty, Failure, Loading, RemoteData, Success } from './model'
  *
  * @category guards
  * @since 1.0.0
- * @param t
  */
 export const isLoading = <E, A>(t: RemoteData<E, A>): t is Loading =>
   t._tag === 'Loading'
@@ -36,7 +35,6 @@ export const isLoading = <E, A>(t: RemoteData<E, A>): t is Loading =>
  *
  * @category guards
  * @since 1.0.0
- * @param t
  */
 export const isFailure = <E, A>(t: RemoteData<E, A>): t is Failure<E> =>
   t._tag === 'Failure'
@@ -54,7 +52,6 @@ export const isFailure = <E, A>(t: RemoteData<E, A>): t is Failure<E> =>
  *
  * @category guards
  * @since 1.0.0
- * @param t
  */
 export const isEmpty = <E, A>(t: RemoteData<E, A>): t is Empty =>
   t._tag === 'Empty'
@@ -72,7 +69,6 @@ export const isEmpty = <E, A>(t: RemoteData<E, A>): t is Empty =>
  *
  * @category guards
  * @since 1.0.0
- * @param t
  */
 export const isSuccess = <E, A>(t: RemoteData<E, A>): t is Success<A> =>
   t._tag === 'Success'

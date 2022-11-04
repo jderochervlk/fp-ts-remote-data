@@ -27,8 +27,6 @@ Added in v1.0.0
 
 ## chain
 
-Composes computations in sequence, using the return value of one computation to determine the next computation.
-
 **Signature**
 
 ```ts
@@ -37,11 +35,23 @@ export declare const chain: <E, A = E, B = A>(
 ) => (ma: RemoteData<E, A>) => RemoteData<E, B>
 ```
 
+**Example**
+
+```ts
+import * as RD from '@jvlk/fp-ts-remote-data'
+import { pipe } from 'fp-ts/function'
+
+pipe(
+  RD.success(42),
+  RD.chain((n) => (n > 10 ? RD.success(n) : RD.failure(Error('number is too small'))))
+)
+```
+
 Added in v1.0.0
 
 ## chainW
 
-Less strict version of [`chain`](#chain).
+Less strict version of [`chain`](#chain) that allows you to **W**iden the failure type.
 
 **Signature**
 
@@ -51,9 +61,23 @@ export declare const chainW: <D, A, B>(
 ) => <E>(ma: RemoteData<E, A>) => RemoteData<D | E, B>
 ```
 
+**Example**
+
+```ts
+import * as RD from '@jvlk/fp-ts-remote-data'
+import { pipe } from 'fp-ts/function'
+
+pipe(
+  RD.failure<string, string>('error'), // RemoteData<string, string>
+  RD.chainW(() => RD.failure(Error('number is too small'))) // => RemoteData<Error | string, string>
+)
+```
+
 Added in v1.0.0
 
 ## fold
+
+Fold and return the same type in the response.
 
 **Signature**
 
@@ -66,9 +90,28 @@ export declare const fold: <E, A, B>(
 ) => (rd: RemoteData<E, A>) => B
 ```
 
+**Example**
+
+```ts
+import * as RD from '@jvlk/fp-ts-remote-data'
+import { pipe } from 'fp-ts/function'
+
+const resultOne = pipe(
+  RD.success(42),
+  RD.foldW(
+    () => 'loading',
+    (e) => `${e}`,
+    () => 'empty',
+    (t) => `value is ${t}`
+  )
+)
+```
+
 Added in v1.0.0
 
 ## foldW
+
+Fold and return different types in the response.
 
 **Signature**
 
@@ -81,6 +124,23 @@ export declare const foldW: <E, A, U, T, V, Z>(
 ) => (rd: RemoteData<E, A>) => U | T | V | Z
 ```
 
+**Example**
+
+```ts
+import * as RD from '@jvlk/fp-ts-remote-data'
+import { pipe } from 'fp-ts/function'
+
+const resultOne = pipe(
+  RD.success(42),
+  RD.foldW(
+    () => 'loading',
+    (e) => Error(e),
+    () => null,
+    (t) => [t]
+  )
+)
+```
+
 Added in v1.0.0
 
 ## map
@@ -89,6 +149,23 @@ Added in v1.0.0
 
 ```ts
 export declare const map: <A, B>(f: (a: A) => B) => <E>(fa: RemoteData<E, A>) => RemoteData<E, B>
+```
+
+**Example**
+
+```ts
+import * as RD from '@jvlk/fp-ts-remote-data'
+import { pipe } from 'fp-ts/function'
+
+pipe(
+  RD.success(42),
+  RD.map((n) => n + 10) // => success(52)
+)
+
+pipe(
+  RD.empty,
+  RD.map((n) => n + 10) // => empty
+)
 ```
 
 Added in v1.0.0
