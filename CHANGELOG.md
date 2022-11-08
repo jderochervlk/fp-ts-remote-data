@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/jderochervlk/fp-ts-remote-data/compare/v1.0.0...v1.0.1) (2022-11-08)
+
+
+### Bug Fixes
+
+* remove lib from fp-ts imports ([0fb7c27](https://github.com/jderochervlk/fp-ts-remote-data/commit/0fb7c27efa35af0c73c0ab590d646f5fd509f4d2))
+
 # 1.0.0 (2022-11-04)
 
 
