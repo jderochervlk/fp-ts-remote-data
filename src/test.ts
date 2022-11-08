@@ -4,7 +4,7 @@
  */
 
 import * as RD from '.'
-import { pipe } from 'fp-ts/lib/function'
+import { pipe } from 'fp-ts/function'
 
 test('loading', () => {
   expect(RD.isLoading(RD.loading)).toBeTruthy()
