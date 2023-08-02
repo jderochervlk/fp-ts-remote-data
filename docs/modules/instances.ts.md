@@ -38,12 +38,12 @@ export declare const chain: <E, A = E, B = A>(
 **Example**
 
 ```ts
-import * as RD from '@jvlk/fp-ts-remote-data'
+import * as D from '@jvlk/fp-ts-remote-data'
 import { pipe } from 'fp-ts/function'
 
 pipe(
-  RD.success(42),
-  RD.chain((n) => (n > 10 ? RD.success(n) : RD.failure(Error('number is too small'))))
+  D.success(42),
+  D.chain((n) => (n > 10 ? D.success(n) : D.failure(Error('number is too small'))))
 )
 ```
 
@@ -64,12 +64,12 @@ export declare const chainW: <D, A, B>(
 **Example**
 
 ```ts
-import * as RD from '@jvlk/fp-ts-remote-data'
+import * as D from '@jvlk/fp-ts-remote-data'
 import { pipe } from 'fp-ts/function'
 
 pipe(
-  RD.failure<string, string>('error'), // RemoteData<string, string>
-  RD.chainW(() => RD.failure(Error('number is too small'))) // => RemoteData<Error | string, string>
+  D.failure<string, string>('error'), // RemoteData<string, string>
+  D.chainW(() => D.failure(Error('number is too small'))) // => RemoteData<Error | string, string>
 )
 ```
 
@@ -87,18 +87,18 @@ export declare const fold: <E, A, B>(
   failure: (e: E) => B,
   empty: () => B,
   success: (a: A) => B
-) => (rd: RemoteData<E, A>) => B
+) => (d: RemoteData<E, A>) => B
 ```
 
 **Example**
 
 ```ts
-import * as RD from '@jvlk/fp-ts-remote-data'
+import * as D from '@jvlk/fp-ts-remote-data'
 import { pipe } from 'fp-ts/function'
 
 const resultOne = pipe(
-  RD.success(42),
-  RD.foldW(
+  D.success(42),
+  D.fold(
     () => 'loading',
     (e) => `${e}`,
     () => 'empty',
@@ -121,18 +121,18 @@ export declare const foldW: <E, A, U, T, V, Z>(
   failure: (e: E) => T,
   empty: () => V,
   success: (a: A) => Z
-) => (rd: RemoteData<E, A>) => U | T | V | Z
+) => (d: RemoteData<E, A>) => U | T | V | Z
 ```
 
 **Example**
 
 ```ts
-import * as RD from '@jvlk/fp-ts-remote-data'
+import * as D from '@jvlk/fp-ts-remote-data'
 import { pipe } from 'fp-ts/function'
 
 const resultOne = pipe(
-  RD.success(42),
-  RD.foldW(
+  D.success(42),
+  D.foldW(
     () => 'loading',
     (e) => Error(e),
     () => null,
@@ -154,17 +154,17 @@ export declare const map: <A, B>(f: (a: A) => B) => <E>(fa: RemoteData<E, A>) =>
 **Example**
 
 ```ts
-import * as RD from '@jvlk/fp-ts-remote-data'
+import * as D from '@jvlk/fp-ts-remote-data'
 import { pipe } from 'fp-ts/function'
 
 pipe(
-  RD.success(42),
-  RD.map((n) => n + 10) // => success(52)
+  D.success(42),
+  D.map((n) => n + 10) // => success(52)
 )
 
 pipe(
-  RD.empty,
-  RD.map((n) => n + 10) // => empty
+  D.empty,
+  D.map((n) => n + 10) // => empty
 )
 ```
 
