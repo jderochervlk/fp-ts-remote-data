@@ -8,17 +8,17 @@ import { isEmpty, isFailure, isLoading, isSuccess } from './refinements'
 
 /**
  * @example
- * import * as RD from '@jvlk/fp-ts-remote-data'
+ * import * as D from '@jvlk/fp-ts-remote-data'
  * import { pipe } from 'fp-ts/function'
  *
  * pipe(
- *  RD.success(42),
- *  RD.map(n => n + 10) // => success(52)
+ *  D.success(42),
+ *  D.map(n => n + 10) // => success(52)
  * )
  *
  * pipe(
- *  RD.empty,
- *  RD.map(n => n + 10) // => empty
+ *  D.empty,
+ *  D.map(n => n + 10) // => empty
  * )
  *
  * @category instance operations
@@ -33,12 +33,12 @@ export const map: <A, B>(
  * Less strict version of [`chain`](#chain) that allows you to **W**iden the failure type.
  *
  * @example
- * import * as RD from '@jvlk/fp-ts-remote-data'
+ * import * as D from '@jvlk/fp-ts-remote-data'
  * import { pipe } from 'fp-ts/function'
  *
  * pipe(
- *  RD.failure<string, string>('error'), // RemoteData<string, string>
- *  RD.chainW(() => RD.failure(Error('number is too small'))) // => RemoteData<Error | string, string>
+ *  D.failure<string, string>('error'), // RemoteData<string, string>
+ *  D.chainW(() => D.failure(Error('number is too small'))) // => RemoteData<Error | string, string>
  * )
  *
  * @category instance operations
@@ -51,12 +51,12 @@ export const chainW =
 
 /**
  * @example
- * import * as RD from '@jvlk/fp-ts-remote-data'
+ * import * as D from '@jvlk/fp-ts-remote-data'
  * import { pipe } from 'fp-ts/function'
  *
  * pipe(
- *  RD.success(42),
- *  RD.chain(n => n > 10 ? RD.success(n) : RD.failure(Error('number is too small')))
+ *  D.success(42),
+ *  D.chain(n => n > 10 ? D.success(n) : D.failure(Error('number is too small')))
  * )
  *
  * @category instance operations
@@ -90,12 +90,12 @@ export const reduceRight: <A, B>(
  * Fold and return different types in the response.
  *
  * @example
- * import * as RD from '@jvlk/fp-ts-remote-data'
+ * import * as D from '@jvlk/fp-ts-remote-data'
  * import { pipe } from 'fp-ts/function'
  *
  * const resultOne = pipe(
- *      RD.success(42),
- *      RD.foldW(
+ *      D.success(42),
+ *      D.foldW(
  *          () => "loading",
  *          e => Error(e),
  *          () => null,
@@ -113,26 +113,26 @@ export const foldW =
     empty: () => V,
     success: (a: A) => Z
   ) =>
-  (rd: RemoteData<E, A>) => {
-    return isLoading(rd)
+  (d: RemoteData<E, A>) => {
+    return isLoading(d)
       ? loading()
-      : isFailure(rd)
-      ? failure(rd.failure)
-      : isEmpty(rd)
+      : isFailure(d)
+      ? failure(d.failure)
+      : isEmpty(d)
       ? empty()
-      : success(rd.success)
+      : success(d.success)
   }
 
 /**
  * Fold and return the same type in the response.
  *
  * @example
- * import * as RD from '@jvlk/fp-ts-remote-data'
+ * import * as D from '@jvlk/fp-ts-remote-data'
  * import { pipe } from 'fp-ts/function'
  *
  * const resultOne = pipe(
- *      RD.success(42),
- *      RD.foldW(
+ *      D.success(42),
+ *      D.fold(
  *          () => "loading",
  *          e => `${e}`,
  *          () => "empty",
@@ -149,7 +149,6 @@ export const fold =
     failure: (e: E) => B,
     empty: () => B,
     success: (a: A) => B
-  ) =>
-  (rd: RemoteData<E, A>) => {
-    return foldW<E, A, B, B, B, B>(loading, failure, empty, success)(rd)
+  ) => {
+    return foldW<E, A, B, B, B, B>(loading, failure, empty, success)
   }

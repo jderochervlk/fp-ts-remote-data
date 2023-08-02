@@ -17,7 +17,7 @@ RemoteData represents a value that can be in one of four states:
 ## Example in React
 
 ```tsx
-import * as RD from '@jvlk/fp-ts-remote-data'
+import * as D from '@jvlk/fp-ts-remote-data'
 import { pipe } from 'fp-ts/function'
 
 import useBlogRequest from './useBlogRequest'
@@ -31,7 +31,7 @@ function Component() {
 
   return pipe(
     blog,
-    RD.fold(
+    D.fold(
         () => <Loading />),
         err => <Error error={err}>,
         () => <Empty/>,
